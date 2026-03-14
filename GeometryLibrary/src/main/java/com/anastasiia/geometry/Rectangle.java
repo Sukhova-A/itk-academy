@@ -7,7 +7,7 @@ public class Rectangle implements Shape {
 
     public Rectangle(double width, double height) {
         if (width < 0 || height < 0) {
-            throw new IllegalArgumentException();
+            throw new IllegalArgumentException("Width and height cannot be negative");
         }
         this.width = width;
         this.height = height;
