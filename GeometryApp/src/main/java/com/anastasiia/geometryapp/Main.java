@@ -3,6 +3,7 @@ package com.anastasiia.geometryapp;
 import com.anastasiia.geometry.Circle;
 import com.anastasiia.geometry.Rectangle;
 import com.anastasiia.geometry.Triangle;
+import com.anastasiia.utils.GeometryUtils;
 
 public class Main {
     public static void main(String[] args) {
@@ -19,6 +20,7 @@ public class Main {
         System.out.println("Rectangle: " + rectangle);
         System.out.println("Area: " + rectangle.getArea());
         System.out.println("Perimeter: " + rectangle.getPerimeter());
+        System.out.println("Circle larger than Rectangle: " + GeometryUtils.isLarger(circle, rectangle));
         System.out.println();
 
         System.out.println("Triangle: " + triangle);
