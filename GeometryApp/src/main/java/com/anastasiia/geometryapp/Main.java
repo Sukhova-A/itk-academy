@@ -21,6 +21,8 @@ public class Main {
         System.out.println("Area: " + rectangle.getArea());
         System.out.println("Perimeter: " + rectangle.getPerimeter());
         System.out.println("Circle larger than Rectangle: " + GeometryUtils.isLarger(circle, rectangle));
+        System.out.println("Circle larger by perimeter than Rectangle: "
+                + GeometryUtils.isLargerByPerimeter(circle, rectangle));
         System.out.println();
 
         System.out.println("Triangle: " + triangle);

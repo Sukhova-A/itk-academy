@@ -8,6 +8,10 @@ public class GeometryUtils {
         return a.getArea() > b.getArea();
     }
 
+    public static boolean isLargerByPerimeter(Shape a, Shape b) {
+        return a.getPerimeter() > b.getPerimeter();
+    }
+
     public static double convertToCm(double value, String unit) {
         return switch (unit.toLowerCase()) {
             case "mm" -> value / 10;
