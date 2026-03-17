@@ -1,6 +1,7 @@
 package com.anastasiia.geometryapp;
 
 import com.anastasiia.geometry.Circle;
+import com.anastasiia.geometry.Cube;
 import com.anastasiia.geometry.Rectangle;
 import com.anastasiia.geometry.Triangle;
 import com.anastasiia.utils.GeometryUtils;
@@ -12,12 +13,12 @@ public class Main {
         Rectangle rectangle = new Rectangle(4.0, 6.0);
         Triangle triangle = new Triangle(3.0, 4.0, 5.0);
 
-        System.out.println("Circle: " + circle);
+        System.out.println(circle);
         System.out.println("Area: " + circle.getArea());
         System.out.println("Perimeter: " + circle.getPerimeter());
         System.out.println();
 
-        System.out.println("Rectangle: " + rectangle);
+        System.out.println(rectangle);
         System.out.println("Area: " + rectangle.getArea());
         System.out.println("Perimeter: " + rectangle.getPerimeter());
         System.out.println("Circle larger than Rectangle: " + GeometryUtils.isLarger(circle, rectangle));
@@ -25,8 +26,13 @@ public class Main {
                 + GeometryUtils.isLargerByPerimeter(circle, rectangle));
         System.out.println();
 
-        System.out.println("Triangle: " + triangle);
+        System.out.println(triangle);
         System.out.println("Area: " + triangle.getArea());
         System.out.println("Perimeter: " + triangle.getPerimeter());
+        System.out.println();
+
+        Cube cube = new Cube(5);
+        System.out.println(cube);
+        System.out.println("Volume: " + cube.getVolume());
     }
 }
