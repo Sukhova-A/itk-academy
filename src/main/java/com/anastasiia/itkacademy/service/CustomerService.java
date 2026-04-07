@@ -2,6 +2,7 @@ package com.anastasiia.itkacademy.service;
 
 import java.util.UUID;
 
+import com.anastasiia.itkacademy.controller.converter.CustomerMapper;
 import com.anastasiia.itkacademy.controller.dto.CustomerDto;
 import com.anastasiia.itkacademy.entity.Customer;
 import com.anastasiia.itkacademy.repository.CustomerRepository;
@@ -13,24 +14,18 @@ import org.springframework.transaction.annotation.Transactional;
 public class CustomerService {
 
     private final CustomerRepository customerRepository;
+    private final CustomerMapper customerMapper;
 
-    public CustomerService(CustomerRepository customerRepository) {
+    public CustomerService(CustomerRepository customerRepository,
+                           CustomerMapper customerMapper) {
         this.customerRepository = customerRepository;
+        this.customerMapper = customerMapper;
     }
 
     @Transactional(readOnly = true)
     public CustomerDto getById(UUID id) {
-        Customer order = customerRepository.findById(id)
+        Customer customer = customerRepository.findById(id)
                 .orElseThrow(() -> new EntityNotFoundException(String.format("Покупатель с id %s не найден", id)));
-        return mapToDto(order);
-    }
-
-    private CustomerDto mapToDto(Customer c) {
-        return new CustomerDto()
-                .setId(c.getId())
-                .setFirstName(c.getFirstName())
-                .setLastName(c.getLastName())
-                .setEmail(c.getEmail())
-                .setNumber(c.getNumber());
+        return customerMapper.toDto(customer);
     }
 }

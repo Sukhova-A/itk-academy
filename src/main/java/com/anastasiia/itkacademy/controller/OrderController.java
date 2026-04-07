@@ -1,12 +1,13 @@
 package com.anastasiia.itkacademy.controller;
 
-import java.util.List;
 import java.util.UUID;
 
 import com.anastasiia.itkacademy.controller.dto.OrderDto;
 import com.anastasiia.itkacademy.controller.request.OrderRequest;
 import com.anastasiia.itkacademy.service.OrderService;
 import jakarta.validation.Valid;
+import org.springframework.data.domain.Page;
+import org.springframework.data.domain.Pageable;
 import org.springframework.http.HttpStatus;
 import org.springframework.http.ResponseEntity;
 import org.springframework.web.bind.annotation.GetMapping;
@@ -27,8 +28,8 @@ public class OrderController {
     }
 
     @GetMapping
-    public ResponseEntity<List<OrderDto>> getAllOrders() {
-        return ResponseEntity.ok(orderService.findAll());
+    public ResponseEntity<Page<OrderDto>> getAllOrders(Pageable pageable) {
+        return ResponseEntity.ok(orderService.findAll(pageable));
     }
 
     @GetMapping("/{id}")

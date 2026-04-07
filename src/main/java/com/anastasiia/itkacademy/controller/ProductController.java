@@ -1,12 +1,13 @@
 package com.anastasiia.itkacademy.controller;
 
-import java.util.List;
 import java.util.UUID;
 
 import com.anastasiia.itkacademy.controller.dto.ProductDto;
 import com.anastasiia.itkacademy.controller.request.ProductRequest;
 import com.anastasiia.itkacademy.service.ProductService;
 import jakarta.validation.Valid;
+import org.springframework.data.domain.Page;
+import org.springframework.data.domain.Pageable;
 import org.springframework.http.HttpStatus;
 import org.springframework.http.ResponseEntity;
 import org.springframework.web.bind.annotation.DeleteMapping;
@@ -29,8 +30,8 @@ public class ProductController {
     }
 
     @GetMapping
-    public ResponseEntity<List<ProductDto>> getAllProducts() {
-        return ResponseEntity.ok(productService.findAll());
+    public ResponseEntity<Page<ProductDto>> getAllProducts(Pageable pageable) {
+        return ResponseEntity.ok(productService.findAll(pageable));
     }
 
     @GetMapping("/{id}")

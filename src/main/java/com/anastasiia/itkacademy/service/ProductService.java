@@ -1,13 +1,15 @@
 package com.anastasiia.itkacademy.service;
 
-import java.util.List;
 import java.util.UUID;
 
+import com.anastasiia.itkacademy.controller.converter.ProductMapper;
 import com.anastasiia.itkacademy.controller.dto.ProductDto;
 import com.anastasiia.itkacademy.controller.request.ProductRequest;
 import com.anastasiia.itkacademy.entity.Product;
 import com.anastasiia.itkacademy.repository.ProductRepository;
 import jakarta.persistence.EntityNotFoundException;
+import org.springframework.data.domain.Page;
+import org.springframework.data.domain.Pageable;
 import org.springframework.stereotype.Service;
 import org.springframework.transaction.annotation.Transactional;
 
@@ -15,25 +17,28 @@ import org.springframework.transaction.annotation.Transactional;
 public class ProductService {
 
     private final ProductRepository productRepository;
+    private final ProductMapper productMapper;
 
-    public ProductService(ProductRepository productRepository) {
+    public ProductService(ProductRepository productRepository,
+                          ProductMapper productMapper) {
         this.productRepository = productRepository;
+        this.productMapper = productMapper;
     }
 
-    public List<ProductDto> findAll() {
-        return productRepository.findAll()
-                .stream()
-                .map(this::mapToDto)
-                .toList();
+    @Transactional(readOnly = true)
+    public Page<ProductDto> findAll(Pageable pageable) {
+        return productRepository.findAll(pageable)
+                .map(productMapper::toDto);
     }
 
+    @Transactional(readOnly = true)
     public ProductDto getById(UUID id) {
         Product product = productRepository.findById(id)
                 .orElseThrow(() -> new EntityNotFoundException(String.format("Продукт с id %s не найден", id)));
         if (product.isDeleted()) {
             throw new RuntimeException("Продукт является удалённым");
         }
-        return mapToDto(product);
+        return productMapper.toDto(product);
     }
 
     @Transactional
@@ -57,7 +62,7 @@ public class ProductService {
         p.setPrice(request.getPrice());
         p.setQuantityStock(request.getQuantityInStock());
 
-        return mapToDto(p);
+        return productMapper.toDto(p);
     }
 
     @Transactional
@@ -66,15 +71,5 @@ public class ProductService {
                 .orElseThrow(() -> new EntityNotFoundException(String.format("Продукт с id %s не найден", id)));
         if (p.isDeleted()) return;
         p.setDeleted(true);
-    }
-
-    private ProductDto mapToDto(Product p) {
-        return new ProductDto()
-                .setId(p.getId())
-                .setName(p.getName())
-                .setDescription(p.getDescription())
-                .setPrice(p.getPrice())
-                .setQuantityInStock(p.getQuantityStock())
-                .setDeleted(p.isDeleted());
     }
 }
