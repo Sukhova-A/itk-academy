@@ -1,0 +1,3 @@
+INSERT INTO users (id, username, password, role, is_account_non_locked, failed_attempts) VALUES ('a0eebc99-9c0b-4ef8-bb6d-6bb9bd380a11', 'admin', '$2a$10$gkzWGl7wkzWlR4WSw8HdaO9uDPR2/8GqRqAU.cnED68SkyYv1vRXW', 'SUPER_ADMIN', true, 0);
+INSERT INTO users (id, username, password, role, is_account_non_locked, failed_attempts) VALUES ('b0eebc99-9c0b-4ef8-bb6d-6bb9bd380a12', 'moderator', '$2a$10$gkzWGl7wkzWlR4WSw8HdaO9uDPR2/8GqRqAU.cnED68SkyYv1vRXW', 'MODERATOR', true, 0);
+INSERT INTO users (id, username, password, role, is_account_non_locked, failed_attempts) VALUES ('c0eebc99-9c0b-4ef8-bb6d-6bb9bd380a13', 'user', '$2a$10$gkzWGl7wkzWlR4WSw8HdaO9uDPR2/8GqRqAU.cnED68SkyYv1vRXW', 'USER', true, 0);

@@ -1,0 +1,30 @@
+spring:
+  application:
+    name: itk-academy
+
+  datasource:
+    url: jdbc:h2:mem:testdb;DB_CLOSE_DELAY=-1;MODE=PostgreSQL
+    driver-class-name: org.h2.Driver
+    username: sa
+    password:
+    jpa:
+      database-platform: org.hibernate.dialect.H2Dialect
+      defer-datasource-initialization: true
+      hibernate:
+        ddl-auto: update
+    sql:
+      init:
+        mode: always
+    h2:
+      console:
+        enabled: true
+        path: /h2-console
+
+server:
+  ssl:
+    enabled: true
+    key-store: classpath:cert/demo.p12
+    key-store-password: changeit
+    key-store-type: PKCS12
+    key-alias: demo
+  port: 8443
