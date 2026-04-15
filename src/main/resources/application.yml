@@ -1,0 +1,20 @@
+spring:
+  application:
+    name: itk-academy
+
+  datasource:
+    url: jdbc:h2:mem:test
+    driver-class-name: org.h2.Driver
+  jpa:
+    hibernate:
+      ddl-auto: update
+
+  security:
+    oauth2:
+      client:
+        registration:
+          github:
+            client-id: Ov23lid5rMOwdEw9tz2U
+            client-secret: 62eef8d2670d129e473e114323cd1a8afdec8a12
+            scope: user:email, read:user
+            redirect-uri: "{baseUrl}/login/oauth2/code/{registrationId}"
